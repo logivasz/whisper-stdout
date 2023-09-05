@@ -36,7 +36,7 @@ setup(
         )
     ],
     entry_points={
-        "console_scripts": ["whisper=whisper.transcribe:cli"],
+        "console_scripts": ["whispe2r=whisper.transcribe:cli"],
     },
     include_package_data=True,
     extras_require={"dev": ["pytest", "scipy", "black", "flake8", "isort"]},

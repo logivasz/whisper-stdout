@@ -80,9 +80,11 @@ class ResultWriter:
         output_path = os.path.join(
             self.output_dir, audio_basename + "." + self.extension
         )
-
-        with open(output_path, "w", encoding="utf-8") as f:
-            self.write_result(result, file=f, options=options)
+        if options['output_on_stdout']==False:
+            with open(output_path, "w", encoding="utf-8") as f:
+                self.write_result(result, file=f, options=options)
+        else:
+            self.write_result(result, file=sys.stdout, options=options)
 
     def write_result(self, result: dict, file: TextIO, options: dict):
         raise NotImplementedError
@@ -243,7 +245,7 @@ def get_writer(
         "vtt": WriteVTT,
         "srt": WriteSRT,
         "tsv": WriteTSV,
-        "json": WriteJSON,
+        "json": WriteJSON
     }
 
     if output_format == "all":
